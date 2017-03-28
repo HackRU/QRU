@@ -13,6 +13,8 @@
 </ion-header>
 
 
-<button (click)="click('meal01')">Meal 1</button>
-<button (click)="click('meal02')">Meal 2</button>
-<!-- etc. -->
+<ion-content padding>
+  <button ion-button block (click)="scan('meal01')">Meal 1</button>
+  <button ion-button block (click)="scan('meal02')">Meal 2</button>
+  <!-- etc. -->
+</ion-content>

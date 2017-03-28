@@ -13,4 +13,11 @@
 </ion-header>
 
 
-</button (click)="click()">Start Scanning</button>
+<ion-content padding>
+  <button ion-button block (click)="scan('checkin')">Checkin</button>
+  <button ion-button block (click)="scan('tshirt')">T-Shirt</button>
+
+  <!-- for debugging -->
+  <button ion-button block (click)="testPage('confirm')">Test Confirm</button>
+  <button ion-button block (click)="testPage('reject')">Test Reject</button>
+</ion-content>

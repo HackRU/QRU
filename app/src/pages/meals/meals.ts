@@ -20,8 +20,8 @@ export class MealsPage {
     console.log('ionViewDidLoad MealsPage');
   }
 
-  click(mode: String) {
-    this.NavCtrl.push(ScanPage, {mode, mode});
+  scan(mode: String) {
+    this.navCtrl.push(ScanPage, {mode: mode});
   }
 
 }

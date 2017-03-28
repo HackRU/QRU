@@ -5,6 +5,11 @@ import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
+import { CheckinPage } from '../pages/checkin/checkin';
+import { MealsPage } from '../pages/meals/meals';
+import { ScanPage } from '../pages/scan/scan';
+import { ConfirmPage } from '../pages/confirm/confirm';
+import { RejectPage } from '../pages/reject/reject';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -15,7 +20,12 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     AboutPage,
     ContactPage,
     HomePage,
-    TabsPage
+    TabsPage,
+    CheckinPage,
+    MealsPage,
+    ScanPage,
+    ConfirmPage,
+    RejectPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -26,11 +36,17 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     AboutPage,
     ContactPage,
     HomePage,
-    TabsPage
+    TabsPage,
+    CheckinPage,
+    MealsPage,
+    ScanPage,
+    ConfirmPage,
+    RejectPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
+    //APIName
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

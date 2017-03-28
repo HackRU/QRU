@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { ScanPage } from '../scan/scan';
+// test for debugging
+import { ConfirmPage } from '../confirm/confirm';
+import { RejectPage } from '../reject/reject';
+import { APIReturnSimulation } from '../scan/scan';
 
 /*
   Generated class for the Checkin page.
@@ -20,8 +24,19 @@ export class CheckinPage {
     console.log('ionViewDidLoad CheckinPage');
   }
 
-  click() {
-    this.navCtrl.push(ScanPage, {'checkin', mode});
+  scan(mode: String) {
+    this.navCtrl.push(ScanPage, {mode: mode});
+  }
+
+  // for debugging
+  testPage(page: String) {
+    if (page == 'confirm') {
+      this.navCtrl.push(ConfirmPage,
+        {simulation: new APIReturnSimulation('test', 'test-format')});
+    } else {
+      this.navCtrl.push(RejectPage,
+        {simulation: new APIReturnSimulation('test', 'test-format')});
+    }
   }
 
 }
