@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { BarcodeScanner } from 'ionic-native';
-//import { APIName } from '../../providers/api-name';
+// import { BarcodeScanner } from 'ionic-native';
+import { ZBar } from '@ionic-native/zbar';
+import { QruBackend } from '../../providers/qru-backend';
 import { ConfirmPage } from '../confirm/confirm';
 import { RejectPage } from '../reject/reject';
 
@@ -16,42 +17,27 @@ import { RejectPage } from '../reject/reject';
   templateUrl: 'scan.html'
 })
 export class ScanPage {
-  mode: String;
-  //apiInstance: apiName;
+  eventType: String;
+  backend: QruBackend;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.mode = navParams.get('mode');
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+    public zbar: ZBar) {
+    this.eventType = navParams.get('eventType');
   }
 
   scan() {
-    BarcodeScanner.scan()
+    this.zbar.scan({flash:'off', drawSight:false})
       .then((barcode) => {
-        if (barcode.cancelled) {
-          // give the user a way to break out of the loop
-          this.navCtrl.pop();
-        }
-        // we will deal with the api later
-          /*
-        this.apiInstance.callFunction(barcode.text, this.mode)
+        this.backend.update(this.eventType, barcode.text)
           .then((reply) => {
-            // we don't need to confirm checkin validity
-            if (this.mode == 'checkin') {
-              continue;
-            }
-            if (reply.isValid) {
-              this.navCtrl.push(ConfirmPage, {reply: reply});
+            if (reply == null) {
+              // invalid request
+              this.navCtrl.push(RejectPage);
             } else {
-              this.navCtrl.push(RejectPage, {reply: reply});
+              // valid request
+              this.navCtrl.push(ConfirmPage, {reply: reply});
             }
           });
-          */
-        if (this.mode == 'checkin' || this.mode == 'meal01') {
-          this.navCtrl.push(ConfirmPage, {simulation:
-            new APIReturnSimulation(barcode.text, barcode.format)});
-        } else {
-          this.navCtrl.push(RejectPage, {simulation:
-            new APIReturnSimulation(barcode.text, barcode.format)});
-        }
       }).catch((error) => {
         alert(error);
       });
@@ -64,5 +50,6 @@ export class ScanPage {
 }
 
 export class APIReturnSimulation {
-  constructor(public text: String, public format: String) {}
+  constructor(public email: String, public firstName: String,
+    public lastName:String) {}
 }

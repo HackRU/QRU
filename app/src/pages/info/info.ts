@@ -1,27 +1,25 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { APIReturnSimulation } from '../scan/scan';
 
 /*
-  Generated class for the Confirm page.
+  Generated class for the Info page.
 
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 */
 @Component({
-  selector: 'page-confirm',
-  templateUrl: 'confirm.html'
+  selector: 'page-info',
+  templateUrl: 'info.html'
 })
-export class ConfirmPage {
-  //data: APIReturnType;
-  data: APIReturnSimulation;
+export class InfoPage {
+  info: JSON;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.data = this.navParams.get('reply');
+    this.info = navParams.get('info');
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ConfirmPage');
+    console.log('ionViewDidLoad InfoPage');
   }
 
 }

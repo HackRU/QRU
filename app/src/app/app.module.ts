@@ -13,6 +13,8 @@ import { RejectPage } from '../pages/reject/reject';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { ZBar } from '@ionic-native/zbar';
+import { QruBackend } from '../providers/qru-backend';
 
 @NgModule({
   declarations: [
@@ -46,7 +48,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   providers: [
     StatusBar,
     SplashScreen,
-    //APIName
+    ZBar,
+    QruBackend,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

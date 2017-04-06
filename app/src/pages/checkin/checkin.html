@@ -14,10 +14,20 @@
 
 
 <ion-content padding>
-  <button ion-button block (click)="scan('checkin')">Checkin</button>
-  <button ion-button block (click)="scan('tshirt')">T-Shirt</button>
+  <button ion-button block (click)="click('check in')">Checkin</button>
+  <button ion-button block (click)="click('tshirt')">T-Shirt</button>
+  <button ion-button block (click)="click('midnight surprise')">
+    Midnight Surprise
+  </button>
 
   <!-- for debugging -->
   <button ion-button block (click)="testPage('confirm')">Test Confirm</button>
   <button ion-button block (click)="testPage('reject')">Test Reject</button>
+  <button ion-button block (click)='testAlert(true)'>Valid Alert</button>
+  <button ion-button block (click)='testAlert(false)'>Invalid Alert</button>
+  <button ion-button block (click)='testScanner(true)'>Scan Sight</button>
+  <button ion-button block (click)='testScanner(false)'>Scan No Sight</button>
+  <button ion-button block (click)="testUpdate()">Test Update</button>
+  <button ion-button block (click)='testList()'>Test List</button>
+  <button ion-button block (click)='testInfo()'>Test Info</button>
 </ion-content>

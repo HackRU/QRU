@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { APIReturnSimulation } from '../scan/scan';
 
 /*
   Generated class for the Reject page.
@@ -13,12 +12,8 @@ import { APIReturnSimulation } from '../scan/scan';
   templateUrl: 'reject.html'
 })
 export class RejectPage {
-  //data: APIReturnType;
-  data: APIReturnSimulation;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.data = this.navParams.get('simulation');
-  }
+  constructor(public navCtrl: NavController, public navParams: NavParams) {}
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad RejectPage');
