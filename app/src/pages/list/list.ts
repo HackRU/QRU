@@ -12,10 +12,13 @@ import { NavController, NavParams } from 'ionic-angular';
   templateUrl: 'list.html'
 })
 export class ListPage {
-  public list: Object;
+  public list: Array<String>;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.list = navParams.get('list');
+    if (this.list == null) {
+      this.list = ['null'];
+    }
   }
 
   ionViewDidLoad() {

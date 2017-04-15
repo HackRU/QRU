@@ -142,20 +142,12 @@ export class CheckinPage {
 
   testList() {
     // backend list
-    this.backend.list()
+    this.backend.emaillist()
       .then((reply) => {
-        if (reply == null) {
-          this.alertCtrl.create({
-            title: 'Null',
-            subTitle: 'failed to get email list',
-            buttons: ['OK']
-          }).present();
-        } else {
-          this.navCtrl.push(ListPage, {list: reply});
-        }
+        this.navCtrl.push(ListPage, {list: reply});
       }).catch((error) => {
         this.alertCtrl.create({
-          title: 'Failed',
+          title: error,
           subTitle: 'failed to call API',
           buttons: ['OK']
         }).present();
