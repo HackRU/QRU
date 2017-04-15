@@ -102,8 +102,8 @@ export class CheckinPage {
     this.zbar.scan({flash: 'off', drawSight: hasSight})
       .then((barcode) => {
         this.alertCtrl.create({
-          title: barcode.format,
-          subTitle: barcode.text,
+          title: 'Result Text',
+          subTitle: barcode,
           buttons: ['OK']
         }).present();
       }).catch((error) => {

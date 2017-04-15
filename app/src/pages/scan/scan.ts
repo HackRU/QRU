@@ -48,7 +48,7 @@ export class ScanPage {
     });
     this.zbar.scan({flash:'off', drawSight:false})
       .then((barcode) => {
-        this.backend.update(this.eventType, barcode.text)
+        this.backend.update(this.eventType, barcode)
           .then((reply) => {
             if (reply == null) {
               // invalid request
