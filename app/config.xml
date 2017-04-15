@@ -6,6 +6,7 @@
   <content src="index.html"/>
   <access origin="*"/>
   <allow-navigation href="http://ionic.local/*"/>
+  <allow-navigation href="ec2-54-190-29-165.us-west-2.compute.amazonaws.com:9000/*"/>
   <allow-intent href="http://*/*"/>
   <allow-intent href="https://*/*"/>
   <allow-intent href="tel:*"/>

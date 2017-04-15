@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { Diagnostic } from '@ionic-native/diagnostic';
+import { AlertController } from 'ionic-angular';
 // import { BarcodeScanner } from 'ionic-native';
 import { ZBar } from '@ionic-native/zbar';
 import { QruBackend } from '../../providers/qru-backend';
@@ -18,14 +20,32 @@ import { RejectPage } from '../reject/reject';
 })
 export class ScanPage {
   eventType: String;
-  backend: QruBackend;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-    public zbar: ZBar) {
+    public diagnostic: Diagnostic, public alertCtrl: AlertController,
+    public zbar: ZBar, public backend: QruBackend) {
     this.eventType = navParams.get('eventType');
   }
 
   scan() {
+    this.diagnostic.isCameraAuthorized().then((authorized) => {
+      if (!authorized) {
+        this.alertCtrl.create({
+          title: 'Scan Aborted',
+          subTitle: 'cannot access camera',
+          buttons: ['OK']
+        }).present();
+        return;
+      }
+    }).catch((error) => {
+      console.error(error);
+      this.alertCtrl.create({
+        title: error,
+        subTitle: 'failed to get authorization status',
+        buttons: ['OK']
+      }).present();
+      return;
+    });
     this.zbar.scan({flash:'off', drawSight:false})
       .then((barcode) => {
         this.backend.update(this.eventType, barcode.text)

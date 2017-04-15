@@ -12,7 +12,7 @@ import { NavController, NavParams } from 'ionic-angular';
   templateUrl: 'list.html'
 })
 export class ListPage {
-  list: JSON;
+  public list: Object;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.list = navParams.get('list');

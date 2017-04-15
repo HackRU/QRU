@@ -14,6 +14,7 @@ import { RejectPage } from '../pages/reject/reject';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { ZBar } from '@ionic-native/zbar';
+import { Diagnostic } from '@ionic-native/diagnostic';
 import { QruBackend } from '../providers/qru-backend';
 
 @NgModule({
@@ -50,6 +51,7 @@ import { QruBackend } from '../providers/qru-backend';
     SplashScreen,
     ZBar,
     QruBackend,
+    Diagnostic,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
