@@ -60,6 +60,11 @@ export class ScanPage {
           });
       }).catch((error) => {
         alert(error);
+        this.alertCtrl.create({
+          title: error,
+          subTitle: 'failed to call call API',
+          buttons: ['OK']
+        }).present();
       });
   }
 

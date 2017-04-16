@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers, RequestOptions } from '@angular/http';
+import { Http, /* Headers, RequestOptions */ } from '@angular/http';
 import { AlertController } from 'ionic-angular';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
@@ -19,14 +19,11 @@ export class QruBackend {
     this.baseUrl = 'http://ec2-54-190-29-165.us-west-2.compute.amazonaws.com:9000/';
   }
 
-  update(eventType:String, email: String) {
-    let options = new RequestOptions({
-      headers: new Headers({
-        'Content-Type': 'applications/json'
-      })
-    });
-    let body = JSON.stringify({'event': eventType, email: email});
-    return this.http.post(this.baseUrl + 'update', body, options)
+  update(eventType: String, email: String) {
+    //let body = JSON.stringify({'event': eventType, email: email});
+    //return this.http.post(this.baseUrl + 'update', body)
+    //return this.http.post(null, {})
+    return this.http.post(this.baseUrl + 'update/' + email + '/' + eventType, {})
       .toPromise().then((reply) => {
         return reply.json();
       }).catch((error) => {
@@ -55,25 +52,6 @@ export class QruBackend {
           resolve(data);
         });
     });
-  }
-
-  add(newPerson: Object) {
-    let options = new RequestOptions({
-      headers: new Headers({
-        'Content-Type': 'application/json'
-      })
-    });
-    return this.http.post(this.baseUrl + 'add', JSON.stringify(newPerson),
-      options).toPromise().then((reply) => {
-        return reply.json();
-      }).catch((error) => {
-        console.error(error);
-        this.alertCtrl.create({
-          title: error,
-          subTitle: 'failed to call add',
-          buttons: ['OK']
-        }).present;
-      });
   }
 
 }

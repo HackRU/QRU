@@ -86,6 +86,44 @@ export class CheckinPage {
     });
   }
 
+  getInfo() {
+    // backend info
+    this.diagnostic.isCameraAuthorized().then((isAuthorized) => {
+      if (!isAuthorized) {
+        this.alertCtrl.create({
+          title: 'Scan Aborted',
+          subTitle: 'cannot access camera',
+          buttons: ['OK']
+        }).present();
+        return;
+      }
+    }).catch((error) => {
+      this.alertCtrl.create({
+        title: error,
+        subTitle: 'failed to get authorization status',
+        buttons: ['OK']
+      }).present();
+      return;
+    });
+    this.zbar.scan({flash: 'off', drawSight: true}).then((barcode) => {
+      this.backend.info(barcode).then((reply) => {
+        this.navCtrl.push(InfoPage, {info: reply});
+      }).catch((apiError) => {
+        this.alertCtrl.create({
+          title: apiError,
+          subTitle: 'failed to call API',
+          buttons: ['OK']
+        });
+      });
+    }).catch((scanError) => {
+      this.alertCtrl.create({
+        title: scanError,
+        subTitle: 'failed to scan',
+        buttons: ['OK']
+      }).present();
+    });
+  }
+
   // for debugging
   testScanner(hasSight: boolean) {
     this.diagnostic.isCameraAuthorized().then((authorized) => {
@@ -122,7 +160,7 @@ export class CheckinPage {
 
   testUpdate() {
     // backend update
-    this.backend.update('checkin', 'triangular.pyramid@gmail.com')
+    this.backend.update('checkIn', 'triangular.pyramid@gmail.com')
       .then((reply) => {
         if (reply == null) {
           this.alertCtrl.create({
@@ -137,6 +175,12 @@ export class CheckinPage {
             buttons: ['OK']
           }).present();
         }
+      }).catch((error) => {
+        this.alertCtrl.create({
+          title: error,
+          subTitle: 'failed to call API',
+          buttons: ['OK']
+        }).present();
       });
   }
 
@@ -154,20 +198,5 @@ export class CheckinPage {
       });
   }
 
-  testInfo() {
-    // backend info
-    this.backend.info('triangular.pyramid@gmail.com')
-      .then((reply) => {
-        if (reply == null) {
-          this.alertCtrl.create({
-            title: 'Null',
-            subTitle: 'failed to get info',
-            buttons: ['OK']
-          }).present();
-        } else {
-          this.navCtrl.push(InfoPage, {info: reply});
-        }
-      });
-  }
 
 }
