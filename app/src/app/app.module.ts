@@ -7,6 +7,7 @@ import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { CheckinPage } from '../pages/checkin/checkin';
 import { MealsPage } from '../pages/meals/meals';
+import { IssuesPage } from '../pages/issues/issues';
 import { ScanPage } from '../pages/scan/scan';
 import { ConfirmPage } from '../pages/confirm/confirm';
 import { RejectPage } from '../pages/reject/reject';
@@ -28,6 +29,7 @@ import { QruBackend } from '../providers/qru-backend';
     TabsPage,
     CheckinPage,
     MealsPage,
+    IssuesPage,
     ScanPage,
     ConfirmPage,
     RejectPage,
@@ -46,6 +48,7 @@ import { QruBackend } from '../providers/qru-backend';
     TabsPage,
     CheckinPage,
     MealsPage,
+    IssuesPage,
     ScanPage,
     ConfirmPage,
     RejectPage,

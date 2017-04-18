@@ -20,9 +20,6 @@ export class QruBackend {
   }
 
   update(eventType: String, email: String) {
-    //let body = JSON.stringify({'event': eventType, email: email});
-    //return this.http.post(this.baseUrl + 'update', body)
-    //return this.http.post(null, {})
     return this.http.post(this.baseUrl + 'update/' + email + '/' + eventType, {})
       .toPromise().then((reply) => {
         return reply.json();

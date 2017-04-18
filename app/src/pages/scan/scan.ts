@@ -29,13 +29,14 @@ export class ScanPage {
 
   scan() {
     this.diagnostic.isCameraAuthorized().then((authorized) => {
-      if (!authorized) {
+      if (authorized) {
+        this.openCamera();
+      } else {
         this.alertCtrl.create({
           title: 'Scan Aborted',
           subTitle: 'cannot access camera',
           buttons: ['OK']
         }).present();
-        return;
       }
     }).catch((error) => {
       console.error(error);
@@ -44,8 +45,10 @@ export class ScanPage {
         subTitle: 'failed to get authorization status',
         buttons: ['OK']
       }).present();
-      return;
     });
+  }
+
+  openCamera() {
     this.zbar.scan({flash:'off', drawSight:false})
       .then((barcode) => {
         this.backend.update(this.eventType, barcode)
@@ -72,9 +75,4 @@ export class ScanPage {
     console.log('ionViewDidLoad ScanPage');
   }
 
-}
-
-export class APIReturnSimulation {
-  constructor(public email: String, public firstName: String,
-    public lastName:String) {}
 }

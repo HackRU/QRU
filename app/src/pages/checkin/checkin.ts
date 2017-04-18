@@ -1,14 +1,13 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { Diagnostic } from '@ionic-native/diagnostic';
+import { ActionSheetController } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 import { ScanPage } from '../scan/scan';
 // test for debugging
-import { ConfirmPage } from '../confirm/confirm';
-import { RejectPage } from '../reject/reject';
 import { ZBar } from '@ionic-native/zbar';
-import { APIReturnSimulation } from '../scan/scan';
 import { QruBackend } from '../../providers/qru-backend';
+import { IssuesPage } from '../issues/issues';
 import { ListPage } from '../list/list';
 import { InfoPage } from '../info/info';
 
@@ -26,13 +25,18 @@ export class CheckinPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public zbar: ZBar, public alertCtrl: AlertController,
+    public actionSheetCtrl: ActionSheetController,
     public diagnostic: Diagnostic, public backend: QruBackend) {}
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad CheckinPage');
   }
 
-  click(mode: String) {
+  showIssues() {
+    this.navCtrl.push(IssuesPage);
+  }
+
+  openScanPage(mode: String) {
     this.navCtrl.push(ScanPage, {eventType: mode});
   }
 
@@ -51,7 +55,7 @@ export class CheckinPage {
         case this.diagnostic.permissionStatus.GRANTED:
         case this.diagnostic.permissionStatus.GRANTED_WHEN_IN_USE:
           this.alertCtrl.create({
-            title: 'Hello',
+            title: 'Hello Again',
             subTitle: 'permission already granted',
             buttons: ['OK']
           }).present();
@@ -86,16 +90,17 @@ export class CheckinPage {
     });
   }
 
-  getInfo() {
+  scan(hasSight: boolean, mode: String, email: String) {
     // backend info
     this.diagnostic.isCameraAuthorized().then((isAuthorized) => {
-      if (!isAuthorized) {
+      if (isAuthorized) {
+        this.openCamera(mode, email);
+      } else {
         this.alertCtrl.create({
           title: 'Scan Aborted',
           subTitle: 'cannot access camera',
           buttons: ['OK']
         }).present();
-        return;
       }
     }).catch((error) => {
       this.alertCtrl.create({
@@ -103,18 +108,22 @@ export class CheckinPage {
         subTitle: 'failed to get authorization status',
         buttons: ['OK']
       }).present();
-      return;
     });
+  }
+
+  openCamera(mode: String, email: String) {
     this.zbar.scan({flash: 'off', drawSight: true}).then((barcode) => {
-      this.backend.info(barcode).then((reply) => {
-        this.navCtrl.push(InfoPage, {info: reply});
-      }).catch((apiError) => {
+      if (mode == null) {
         this.alertCtrl.create({
-          title: apiError,
-          subTitle: 'failed to call API',
+          title: 'Scan Result',
+          subTitle: barcode,
           buttons: ['OK']
-        });
-      });
+        }).present();
+      } else if (mode == 'info') {
+        this.testInfo(barcode);
+      } else {
+        this.testUpdate(mode, email)
+      }
     }).catch((scanError) => {
       this.alertCtrl.create({
         title: scanError,
@@ -125,42 +134,92 @@ export class CheckinPage {
   }
 
   // for debugging
-  testScanner(hasSight: boolean) {
-    this.diagnostic.isCameraAuthorized().then((authorized) => {
-      if (!authorized) {
-        this.alertCtrl.create({
-          title: 'Scan Aborted',
-          subTitle: 'cannot access camera',
-          buttons: ['OK']
-        }).present();
-      }
-    }).catch((error) => {
-      console.error(error);
-    });
-    this.zbar.scan({flash: 'off', drawSight: hasSight})
-      .then((barcode) => {
-        this.alertCtrl.create({
-          title: 'Result Text',
-          subTitle: barcode,
-          buttons: ['OK']
-        }).present();
-      }).catch((error) => {
-        alert(error);
-      });
+  selectEvent() {
+    // backend update with arbitrary event and email
+    this.actionSheetCtrl.create({
+      title: 'Choose an event',
+      buttons: [
+        {
+          text: 'Check-in',
+          handler: () => {
+            this.selectEmail('checkedIn');
+          }
+        },
+        {
+          text: 'T-Shirt',
+          handler: () => {
+            this.selectEmail('tshirt');
+          }
+        },
+        {
+          text: 'Lunch 1',
+          handler: () => {
+            this.selectEmail('lunch1');
+          }
+        },
+        {
+          text: 'Dinner',
+          handler: () => {
+            this.selectEmail('dinner');
+          }
+        },
+        {
+          text: 'Midnight Snack',
+          handler: () => {
+            this.selectEmail('midnightSnack');
+          }
+        },
+        {
+          text: 'Breakfast',
+          handler: () => {
+            this.selectEmail('breakfast');
+          }
+        },
+        {
+          text: 'Lunch 2',
+          handler: () => {
+            this.selectEmail('lunch2');
+          }
+        },
+        {
+          text: 'Cancel',
+          handler: () => {}
+        }
+      ]
+    }).present();
   }
 
-  testPage(page: String) {
-    if (page == 'confirm') {
-      this.navCtrl.push(ConfirmPage,
-        {reply: new APIReturnSimulation('test@example', 'first', 'last')});
-    } else {
-      this.navCtrl.push(RejectPage);
-    }
+  selectEmail(mode: String) {
+    // backend update with arbitrary email
+    this.alertCtrl.create({
+      title: 'Email',
+      message: 'enter an email address',
+      inputs: [{
+        name: 'email',
+        placeholder: 'name@example.com'
+      }],
+      buttons: [
+        {
+          text: 'Cancel',
+          handler: () => {}
+        },
+        {
+          text: 'Save',
+          handler: (data) => {
+            if (mode == 'info') {
+              this.testInfo(data['email']);
+            } else {
+              this.testUpdate(mode, data['email']);
+            }
+          }
+        }
+      ]
+    }).present();
   }
 
-  testUpdate() {
+  testUpdate(mode: String, email: String) {
     // backend update
-    this.backend.update('checkIn', 'triangular.pyramid@gmail.com')
+    this.backend.update(mode, email)
       .then((reply) => {
         if (reply == null) {
           this.alertCtrl.create({
@@ -198,5 +257,17 @@ export class CheckinPage {
       });
   }
 
+  testInfo(email: String) {
+    // backend info
+    this.backend.info(email).then((reply) => {
+      this.navCtrl.push(InfoPage, {info: reply});
+    }).catch((apiError) => {
+      this.alertCtrl.create({
+        title: apiError,
+        subTitle: 'failed to call API',
+        buttons: ['OK']
+      });
+    });
+  }
 
 }
