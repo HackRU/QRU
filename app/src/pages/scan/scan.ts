@@ -5,10 +5,12 @@ import { AlertController } from 'ionic-angular';
 // import { BarcodeScanner } from 'ionic-native';
 import { ZBar } from '@ionic-native/zbar';
 import { QruBackend } from '../../providers/qru-backend';
+/*
 import { CheckinPage } from '../checkin/checkin';
 import { MealsPage } from '../meals/meals';
 import { ConfirmPage } from '../confirm/confirm';
 import { RejectPage } from '../reject/reject';
+*/
 
 /*
   Generated class for the Scan page.
@@ -63,7 +65,7 @@ export class ScanPage {
               // invalid request
               this.backend.info(barcode)
                 .then((info) => {
-                  this.navCtrl.push(RejectPage, {reply: info});
+                  //this.navCtrl.push(RejectPage, {reply: info});
                 }).catch((infoError) => {
                   this.alertCtrl.create({
                     title: infoError,
@@ -73,7 +75,7 @@ export class ScanPage {
                 });
             } else {
               // valid request
-              this.navCtrl.push(ConfirmPage, {reply: reply});
+              //this.navCtrl.push(ConfirmPage, {reply: reply});
             }
           });
       }).catch((error) => {
@@ -86,6 +88,7 @@ export class ScanPage {
       });
   }
 
+    /*
   back() {
     if (this.eventType == 'checkIn' || this.eventType == 'tshirt') {
       this.navCtrl.push(CheckinPage);
@@ -93,6 +96,7 @@ export class ScanPage {
       this.navCtrl.push(MealsPage);
     }
   }
+  */
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ScanPage');
