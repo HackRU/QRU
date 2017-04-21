@@ -65,7 +65,7 @@ export class ScanPage {
                 }).catch((infoError) => {
                   this.alertCtrl.create({
                     title: infoError,
-                    subTitle: 'failed to call info',
+                    subTitle: 'not registered',
                     buttons: ['OK']
                   }).present();
                 });
@@ -73,6 +73,7 @@ export class ScanPage {
               // valid request
               this.navCtrl.push(ConfirmPage, {reply: reply});
             }
+            return;
           });
       }).catch((error) => {
         alert(error);

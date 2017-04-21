@@ -133,6 +133,7 @@ export class CheckinPage {
       } else {
         this.testUpdate(mode, email)
       }
+      return;
     }).catch((scanError) => {
       this.alertCtrl.create({
         title: scanError,
