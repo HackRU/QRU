@@ -63,7 +63,7 @@ export class ScanPage {
               // invalid request
               this.backend.info(barcode)
                 .then((info) => {
-                  this.navCtrl.push(RejectPage, {reply: info});
+                  this.navCtrl.push(RejectPage, {rejection: info});
                   //this.displayMember(false, info, eventType);
                 }).catch((infoError) => {
                   this.alertCtrl.create({
@@ -79,7 +79,7 @@ export class ScanPage {
                 buttons: ['OK']
               }).present();
               // valid request
-              this.navCtrl.push(ConfirmPage, {reply: reply});
+              this.navCtrl.push(ConfirmPage, {confirmation: reply});
               //this.displayMember(true, reply, eventType);
             }
           });
@@ -94,18 +94,22 @@ export class ScanPage {
   }
 
   testConfirmPage() {
-    this.navCtrl.push(ConfirmPage, {'reply': {
+    var personObject = {
       firstName: 'firstName',
       lastName: 'lastName',
       email: 'name@example.com',
-      checkedIn: true,
-      tshirt: true,
-      lunch1: 1,
-      dinner: 1,
-      midnightSnack: 1,
-      breakfast: 1,
-      lunch2: 1
-    }});
+      data:
+      {
+        checkedIn: true,
+        tshirt: true,
+        lunch1: 1,
+        dinner: 1,
+        midnightSnack: 1,
+        breakfast: 1,
+        lunch2: 1
+      }
+    }
+    this.navCtrl.push(ConfirmPage, {confirmation: personObject});
   }
 
     /*

@@ -12,10 +12,10 @@ import { NavController, NavParams } from 'ionic-angular';
   templateUrl: 'confirm.html'
 })
 export class ConfirmPage {
-  data: Object;
+  confirmation: Object;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.data = navParams.get('reply');
+    this.confirmation = navParams.get('confirmation');
   }
 
   ionViewDidLoad() {

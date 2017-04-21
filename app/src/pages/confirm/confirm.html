@@ -14,13 +14,14 @@
 
 
 <ion-content padding>
-  <p>This request is valid.</p>
-  <p>email: {{ reply.email }}</p>
-  <p>checkin: {{ reply.data.checkedIn }}</p>
-  <p>tshirt: {{ reply.data.tshirt }}</p>
-  <p>lunch1: {{ reply.data.lunch1 }}</p>
-  <p>dinner: {{ reply.data.dinner }}</p>
-  <p>midnight snack: {{ reply.data.midnightSnack }}</p>
-  <p>breakfast: {{ reply.data.breakfast }}</p>
-  <p>lunch2: {{ reply.data.lunch2 }}</p>
+  <button ion-button block color='green'>Valid Request</button>
+  <p>name: {{ rejection.firstName }} {{ rejection.lastName }}</p>
+  <p>email: {{ confirmation.email }}</p>
+  <p>checkin: {{ confirmation.data.checkedIn }}</p>
+  <p>tshirt: {{ confirmation.data.tshirt }}</p>
+  <p>lunch1: {{ confirmation.data.lunch1 }}</p>
+  <p>dinner: {{ confirmation.data.dinner }}</p>
+  <p>midnight snack: {{ confirmation.data.midnightSnack }}</p>
+  <p>breakfast: {{ confirmation.data.breakfast }}</p>
+  <p>lunch2: {{ confirmation.data.lunch2 }}</p>
 </ion-content>
