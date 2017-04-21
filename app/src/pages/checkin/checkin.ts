@@ -92,6 +92,7 @@ export class CheckinPage {
 
   scan(hasSight: boolean, mode: String, email: String) {
     // backend info
+    /*
     this.diagnostic.isCameraAuthorized().then((isAuthorized) => {
       this.alertCtrl.create({
         title: 'Authorization status',
@@ -99,7 +100,9 @@ export class CheckinPage {
         buttons: ['OK']
       }).present();
       if (isAuthorized) {
+      */
         this.openCamera(mode, email);
+    /*
       } else {
         this.alertCtrl.create({
           title: 'Scan Aborted',
@@ -114,6 +117,7 @@ export class CheckinPage {
         buttons: ['OK']
       }).present();
     });
+    */
   }
 
   openCamera(mode: String, email: String) {

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { Diagnostic } from '@ionic-native/diagnostic';
+//import { Diagnostic } from '@ionic-native/diagnostic';
 import { AlertController } from 'ionic-angular';
 // import { BarcodeScanner } from 'ionic-native';
 import { ZBar } from '@ionic-native/zbar';
@@ -22,15 +22,18 @@ export class ScanPage {
   eventType: String;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-    public diagnostic: Diagnostic, public alertCtrl: AlertController,
+    /*public diagnostic: Diagnostic,*/ public alertCtrl: AlertController,
     public zbar: ZBar, public backend: QruBackend) {
     this.eventType = navParams.get('eventType');
   }
 
   scan() {
+    /*
     this.diagnostic.isCameraAuthorized().then((authorized) => {
       if (authorized) {
+      */
         this.openCamera();
+    /*
       } else {
         this.alertCtrl.create({
           title: 'Scan Aborted',
@@ -46,6 +49,7 @@ export class ScanPage {
         buttons: ['OK']
       }).present();
     });
+    */
   }
 
   openCamera() {
