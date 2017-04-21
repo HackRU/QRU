@@ -151,7 +151,7 @@ export class CheckinPage {
         {
           text: 'Check-in',
           handler: () => {
-            this.selectEmail('checkedIn');
+            this.selectEmail('checkIn');
           }
         },
         {

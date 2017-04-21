@@ -84,6 +84,10 @@ export class ScanPage {
       });
   }
 
+  back() {
+    this.navCtrl.pop();
+  }
+
   ionViewDidLoad() {
     console.log('ionViewDidLoad ScanPage');
   }
