@@ -93,6 +93,11 @@ export class CheckinPage {
   scan(hasSight: boolean, mode: String, email: String) {
     // backend info
     this.diagnostic.isCameraAuthorized().then((isAuthorized) => {
+      this.alertCtrl.create({
+        title: 'Authorization status',
+        subTitle: '' + isAuthorized,
+        buttons: ['OK']
+      }).present();
       if (isAuthorized) {
         this.openCamera(mode, email);
       } else {
