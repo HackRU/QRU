@@ -15,7 +15,7 @@ export class RejectPage {
   reply: Object;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.reply = this.navParams.get('reply');
+    this.reply = navParams.get('reply');
   }
 
   ionViewDidLoad() {

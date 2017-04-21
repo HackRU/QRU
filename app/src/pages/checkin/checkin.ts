@@ -90,9 +90,9 @@ export class CheckinPage {
     });
   }
 
+    /*
   scan(hasSight: boolean, mode: String, email: String) {
     // backend info
-    /*
     this.diagnostic.isCameraAuthorized().then((isAuthorized) => {
       this.alertCtrl.create({
         title: 'Authorization status',
@@ -100,9 +100,7 @@ export class CheckinPage {
         buttons: ['OK']
       }).present();
       if (isAuthorized) {
-      */
         this.openCamera(mode, email);
-    /*
       } else {
         this.alertCtrl.create({
           title: 'Scan Aborted',
@@ -117,11 +115,11 @@ export class CheckinPage {
         buttons: ['OK']
       }).present();
     });
-    */
   }
+  */
 
-  openCamera(mode: String, email: String) {
-    this.zbar.scan({flash: 'off', drawSight: true}).then((barcode) => {
+  openCamera(hasSight: boolean, mode: String, email: String) {
+    this.zbar.scan({flash: 'off', drawSight: hasSight}).then((barcode) => {
       if (mode == null) {
         this.alertCtrl.create({
           title: 'Scan Result',
@@ -270,6 +268,7 @@ export class CheckinPage {
     // backend info
     this.backend.info(email).then((reply) => {
       this.navCtrl.push(InfoPage, {info: reply});
+      //ScanPage.displayInfo(reply);
     }).catch((apiError) => {
       this.alertCtrl.create({
         title: apiError,

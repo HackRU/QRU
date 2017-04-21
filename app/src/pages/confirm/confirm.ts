@@ -15,7 +15,7 @@ export class ConfirmPage {
   data: Object;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.data = this.navParams.get('reply');
+    this.data = navParams.get('reply');
   }
 
   ionViewDidLoad() {

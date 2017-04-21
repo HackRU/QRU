@@ -8,9 +8,9 @@ import { QruBackend } from '../../providers/qru-backend';
 /*
 import { CheckinPage } from '../checkin/checkin';
 import { MealsPage } from '../meals/meals';
+*/
 import { ConfirmPage } from '../confirm/confirm';
 import { RejectPage } from '../reject/reject';
-*/
 
 /*
   Generated class for the Scan page.
@@ -31,13 +31,11 @@ export class ScanPage {
     this.eventType = navParams.get('eventType');
   }
 
-  scan() {
     /*
+  scan() {
     this.diagnostic.isCameraAuthorized().then((authorized) => {
       if (authorized) {
-      */
         this.openCamera();
-    /*
       } else {
         this.alertCtrl.create({
           title: 'Scan Aborted',
@@ -53,8 +51,8 @@ export class ScanPage {
         buttons: ['OK']
       }).present();
     });
-    */
   }
+  */
 
   openCamera() {
     this.zbar.scan({flash:'off', drawSight:false})
@@ -65,7 +63,8 @@ export class ScanPage {
               // invalid request
               this.backend.info(barcode)
                 .then((info) => {
-                  //this.navCtrl.push(RejectPage, {reply: info});
+                  this.navCtrl.push(RejectPage, {reply: info});
+                  //this.displayMember(false, info, eventType);
                 }).catch((infoError) => {
                   this.alertCtrl.create({
                     title: infoError,
@@ -75,7 +74,8 @@ export class ScanPage {
                 });
             } else {
               // valid request
-              //this.navCtrl.push(ConfirmPage, {reply: reply});
+              this.navCtrl.push(ConfirmPage, {reply: reply});
+              //this.displayMember(true, reply, eventType);
             }
           });
       }).catch((error) => {
@@ -87,6 +87,50 @@ export class ScanPage {
         }).present();
       });
   }
+
+    /*
+  displayMember(isValid: boolean, info: Object, eventType: String) {
+    var line: string;
+    line = null;
+    if (eventType == 'checkIn') {
+      line = 'checked in: ' + info.checkedIn;
+    } else if (eventType == 'tshirt') {
+      line = 't-shirt: ' + info.tshirt;
+    } else if (eventType == 'lunch1') {
+      line = 'lunch 1: ' + info.lunch1;
+    } else if (eventType == 'dinner') {
+      line = 'dinner: ' + info.dinner;
+    } else if (eventType == 'midnightSnack') {
+      line = 'midnight snack: ' + info.midnightSnack;
+    } else if (eventType == 'breakfast') {
+      line = 'breakfast: ' + info.breakfast;
+    } else if (eventType == 'lunch2') {
+      line = 'lunch 2: ' + info.lunch2;
+    } else {
+      line = 'event does non exist';
+    }
+    this.alertCtrl.create({
+      title: isValid ? 'Confirmed' : 'Rejected',
+      subTitle: line,
+      buttons: ['OK']
+    }).present();
+  }
+
+  displayInfo(info: Object) {
+    this.alertCtrl.create({
+      title: info.firstName + ' ' + info.lastName,
+      subTitle: 'email: ' + info.email + '\n' +
+      'checked in: ' + info.checkIn + '\n' +
+      't-shirt: ' + info.tshirt + '\n' +
+      'lunch 1: ' + info.lunch1 + '\n' +
+      'dinner: ' + info.dinner + '\n' +
+      'midnight snack: ' + info.midnightSnack + '\n' +
+      'breakfast: ' + info.breakfast + '\n' +
+      'lunch 2: ' + info.lunch2,
+      buttons: ['OK']
+    }).present();
+  }
+  */
 
     /*
   back() {
