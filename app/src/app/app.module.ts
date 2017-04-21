@@ -9,10 +9,10 @@ import { CheckinPage } from '../pages/checkin/checkin';
 import { MealsPage } from '../pages/meals/meals';
 import { IssuesPage } from '../pages/issues/issues';
 import { ScanPage } from '../pages/scan/scan';
-import { ConfirmPage } from '../pages/confirm/confirm';
-import { RejectPage } from '../pages/reject/reject';
+//import { ConfirmPage } from '../pages/confirm/confirm';
+//import { RejectPage } from '../pages/reject/reject';
 import { ListPage } from '../pages/list/list';
-import { InfoPage } from '../pages/info/info';
+//import { InfoPage } from '../pages/info/info';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -31,10 +31,10 @@ import { QruBackend } from '../providers/qru-backend';
     MealsPage,
     IssuesPage,
     ScanPage,
-    ConfirmPage,
-    RejectPage,
-    ListPage,
-    InfoPage
+    //ConfirmPage,
+    //RejectPage,
+    ListPage//,
+    //InfoPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -50,10 +50,10 @@ import { QruBackend } from '../providers/qru-backend';
     MealsPage,
     IssuesPage,
     ScanPage,
-    ConfirmPage,
-    RejectPage,
-    ListPage,
-    InfoPage
+    //ConfirmPage,
+    //RejectPage,
+    ListPage//,
+    //InfoPage
   ],
   providers: [
     StatusBar,

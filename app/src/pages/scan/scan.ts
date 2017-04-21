@@ -8,9 +8,9 @@ import { QruBackend } from '../../providers/qru-backend';
 /*
 import { CheckinPage } from '../checkin/checkin';
 import { MealsPage } from '../meals/meals';
-*/
 import { ConfirmPage } from '../confirm/confirm';
 import { RejectPage } from '../reject/reject';
+*/
 
 /*
   Generated class for the Scan page.
@@ -24,11 +24,27 @@ import { RejectPage } from '../reject/reject';
 })
 export class ScanPage {
   eventType: String;
+  fakePersonObject: Object;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     /*public diagnostic: Diagnostic,*/ public alertCtrl: AlertController,
     public zbar: ZBar, public backend: QruBackend) {
     this.eventType = navParams.get('eventType');
+    this.fakePersonObject = {
+      firstName: 'firstName',
+      lastName: 'lastName',
+      email: 'name@example.com',
+      data:
+      {
+        checkedIn: true,
+        tshirt: true,
+        lunch1: 1,
+        dinner: 1,
+        midnightSnack: 1,
+        breakfast: 1,
+        lunch2: 1
+      }
+    };
   }
 
     /*
@@ -63,8 +79,8 @@ export class ScanPage {
               // invalid request
               this.backend.info(barcode)
                 .then((info) => {
-                  this.navCtrl.push(RejectPage, {rejection: info});
-                  //this.displayMember(false, info, eventType);
+                  //this.navCtrl.push(RejectPage, {rejec: info});
+                  this.displayMember(false, info, this.eventType);
                 }).catch((infoError) => {
                   this.alertCtrl.create({
                     title: infoError,
@@ -79,8 +95,8 @@ export class ScanPage {
                 buttons: ['OK']
               }).present();
               // valid request
-              this.navCtrl.push(ConfirmPage, {confirmation: reply});
-              //this.displayMember(true, reply, eventType);
+              //this.navCtrl.push(ConfirmPage, {conf: reply});
+              this.displayMember(true, reply, this.eventType);
             }
           });
       }).catch((error) => {
@@ -93,45 +109,36 @@ export class ScanPage {
       });
   }
 
-  testConfirmPage() {
-    var personObject = {
-      firstName: 'firstName',
-      lastName: 'lastName',
-      email: 'name@example.com',
-      data:
-      {
-        checkedIn: true,
-        tshirt: true,
-        lunch1: 1,
-        dinner: 1,
-        midnightSnack: 1,
-        breakfast: 1,
-        lunch2: 1
-      }
-    }
-    this.navCtrl.push(ConfirmPage, {confirmation: personObject});
+    /*
+  testConfirmDisplay() {
+    //this.navCtrl.push(ConfirmPage, {conf: personObject});
+    this.displayMember(true, this.fakePersonObject, 'checkIn');
   }
 
-    /*
-  displayMember(isValid: boolean, info: Object, eventType: String) {
+  testInfoDisplay() {
+    this.displayInfo(this.fakePersonObject);
+  }
+  */
+
+  displayMember(isValid: boolean, info: any, eventType: String) {
     var line: string;
-    line = null;
+    line = info.firstName + ' ' + info.lastName + '\nemail: ' + info.email + '\n';
     if (eventType == 'checkIn') {
-      line = 'checked in: ' + info.checkedIn;
+      line += 'checked in: ' + info.data.checkedIn;
     } else if (eventType == 'tshirt') {
-      line = 't-shirt: ' + info.tshirt;
+      line += 't-shirt: ' + info.data.tshirt;
     } else if (eventType == 'lunch1') {
-      line = 'lunch 1: ' + info.lunch1;
+      line += 'lunch 1: ' + info.data.lunch1;
     } else if (eventType == 'dinner') {
-      line = 'dinner: ' + info.dinner;
+      line += 'dinner: ' + info.data.dinner;
     } else if (eventType == 'midnightSnack') {
-      line = 'midnight snack: ' + info.midnightSnack;
+      line += 'midnight snack: ' + info.data.midnightSnack;
     } else if (eventType == 'breakfast') {
-      line = 'breakfast: ' + info.breakfast;
+      line += 'breakfast: ' + info.data.breakfast;
     } else if (eventType == 'lunch2') {
-      line = 'lunch 2: ' + info.lunch2;
+      line += 'lunch 2: ' + info.data.lunch2;
     } else {
-      line = 'event does non exist';
+      line += 'event does non exist';
     }
     this.alertCtrl.create({
       title: isValid ? 'Confirmed' : 'Rejected',
@@ -139,22 +146,6 @@ export class ScanPage {
       buttons: ['OK']
     }).present();
   }
-
-  displayInfo(info: Object) {
-    this.alertCtrl.create({
-      title: info.firstName + ' ' + info.lastName,
-      subTitle: 'email: ' + info.email + '\n' +
-      'checked in: ' + info.checkIn + '\n' +
-      't-shirt: ' + info.tshirt + '\n' +
-      'lunch 1: ' + info.lunch1 + '\n' +
-      'dinner: ' + info.dinner + '\n' +
-      'midnight snack: ' + info.midnightSnack + '\n' +
-      'breakfast: ' + info.breakfast + '\n' +
-      'lunch 2: ' + info.lunch2,
-      buttons: ['OK']
-    }).present();
-  }
-  */
 
     /*
   back() {

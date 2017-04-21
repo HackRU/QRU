@@ -15,7 +15,7 @@ export class RejectPage {
   rejection: Object;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.rejection = navParams.get('rejection');
+    this.rejection = navParams.get('rejec');
   }
 
   ionViewDidLoad() {

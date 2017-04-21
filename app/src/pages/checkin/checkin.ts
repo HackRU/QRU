@@ -9,7 +9,7 @@ import { ZBar } from '@ionic-native/zbar';
 import { QruBackend } from '../../providers/qru-backend';
 import { IssuesPage } from '../issues/issues';
 import { ListPage } from '../list/list';
-import { InfoPage } from '../info/info';
+//import { InfoPage } from '../info/info';
 
 /*
   Generated class for the Checkin page.
@@ -140,6 +140,21 @@ export class CheckinPage {
     });
   }
 
+  displayInfo(info: any) {
+    this.alertCtrl.create({
+      title: info.firstName + ' ' + info.lastName,
+      subTitle: 'email: ' + info.email + '\n' +
+      'checked in: ' + info.data.checkedIn + '\n' +
+      'tshirt: ' + info.data.tshirt + '\n' +
+      'lunch 1: ' + info.data.lunch1 + '\n' +
+      'dinner: ' + info.data.dinner + '\n' +
+      'midnight snack: ' + info.data.midnightSnack + '\n' +
+      'breakfast: ' + info.data.breakfast + '\n' +
+      'lunch 2: ' + info.data.lunch2,
+      buttons: ['OK']
+    }).present();
+  }
+
   // for debugging
   selectEvent() {
     // backend update with arbitrary event and email
@@ -267,8 +282,8 @@ export class CheckinPage {
   testInfo(email: String) {
     // backend info
     this.backend.info(email).then((reply) => {
-      this.navCtrl.push(InfoPage, {info: reply});
-      //ScanPage.displayInfo(reply);
+      //this.navCtrl.push(InfoPage, {info: reply});
+      this.displayInfo(reply);
     }).catch((apiError) => {
       this.alertCtrl.create({
         title: apiError,
