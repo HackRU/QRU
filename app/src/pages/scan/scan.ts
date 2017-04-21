@@ -5,6 +5,8 @@ import { AlertController } from 'ionic-angular';
 // import { BarcodeScanner } from 'ionic-native';
 import { ZBar } from '@ionic-native/zbar';
 import { QruBackend } from '../../providers/qru-backend';
+import { CheckinPage } from '../checkin/checkin';
+import { MealsPage } from '../meals/meals';
 import { ConfirmPage } from '../confirm/confirm';
 import { RejectPage } from '../reject/reject';
 
@@ -86,7 +88,11 @@ export class ScanPage {
   }
 
   back() {
-    this.navCtrl.pop();
+    if (this.eventType == 'checkIn' || this.eventType == 'tshirt') {
+      this.navCtrl.push(CheckinPage);
+    } else {
+      this.navCtrl.push(MealsPage);
+    }
   }
 
   ionViewDidLoad() {
