@@ -73,6 +73,11 @@ export class ScanPage {
                   }).present();
                 });
             } else {
+              this.alertCtrl.create({
+                title: 'testing',
+                subTitle: 'have info',
+                buttons: ['OK']
+              }).present();
               // valid request
               this.navCtrl.push(ConfirmPage, {reply: reply});
               //this.displayMember(true, reply, eventType);
@@ -86,6 +91,21 @@ export class ScanPage {
           buttons: ['OK']
         }).present();
       });
+  }
+
+  testConfirmPage() {
+    this.navCtrl.push(ConfirmPage, {'reply': {
+      firstName: 'firstName',
+      lastName: 'lastName',
+      email: 'name@example.com',
+      checkedIn: true,
+      tshirt: true,
+      lunch1: 1,
+      dinner: 1,
+      midnightSnack: 1,
+      breakfast: 1,
+      lunch2: 1
+    }});
   }
 
     /*

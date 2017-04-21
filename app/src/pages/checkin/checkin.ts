@@ -118,7 +118,7 @@ export class CheckinPage {
   }
   */
 
-  openCamera(hasSight: boolean, mode: String, email: String) {
+  openCamera(hasSight: boolean, mode: String) {
     this.zbar.scan({flash: 'off', drawSight: hasSight}).then((barcode) => {
       if (mode == null) {
         this.alertCtrl.create({
@@ -129,7 +129,7 @@ export class CheckinPage {
       } else if (mode == 'info') {
         this.testInfo(barcode);
       } else {
-        this.testUpdate(mode, email)
+        this.testUpdate(mode, barcode);
       }
     }).catch((scanError) => {
       this.alertCtrl.create({
