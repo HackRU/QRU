@@ -55,7 +55,16 @@ export class ScanPage {
           .then((reply) => {
             if (reply == null) {
               // invalid request
-              this.navCtrl.push(RejectPage);
+              this.backend.info(barcode)
+                .then((info) => {
+                  this.navCtrl.push(RejectPage, {reply: info});
+                }).catch((infoError) => {
+                  this.alertCtrl.create({
+                    title: infoError,
+                    subTitle: 'failed to call info',
+                    buttons: ['OK']
+                  }).present();
+                });
             } else {
               // valid request
               this.navCtrl.push(ConfirmPage, {reply: reply});

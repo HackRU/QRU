@@ -12,8 +12,11 @@ import { NavController, NavParams } from 'ionic-angular';
   templateUrl: 'reject.html'
 })
 export class RejectPage {
+  reply: Object;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.reply = this.navParams.get('reply');
+  }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad RejectPage');

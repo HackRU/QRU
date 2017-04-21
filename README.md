@@ -1,3 +1,3 @@
 # QRU
 
-using the phonegap plugin "barcode scanner"
+using ZBar as barcode scanner
