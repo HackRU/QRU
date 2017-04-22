@@ -13,13 +13,16 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class InfoPage {
   info: Object;
+  /*
   isEvent: boolean;
   isValid: boolean;
   boldText: String;
+  */
   //whiskers: String;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.info = navParams.get('info');
+    /*
     this.isEvent = navParams.get('isEvent');
     this.isValid = navParams.get('isValid');
     if (!this.isEvent) {
@@ -37,6 +40,7 @@ export class InfoPage {
       //this.buttonColor = $colors.red;
       this.boldText = 'Request Rejected';
     }
+    */
   }
 
   ionViewDidLoad() {
