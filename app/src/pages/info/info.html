@@ -13,7 +13,8 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content ng-class="isValid ? confirmed : rejected" padding>
+  <h2>{{ boldText }}</h2>
   <h2>{{ info.firstName }} {{ info.lastName }}</h2>
   <p>email: {{ info.email }}</p>
   <p>checkin: {{ info.data.checkedIn }}</p>

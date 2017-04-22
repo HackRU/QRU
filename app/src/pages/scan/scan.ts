@@ -81,7 +81,12 @@ export class ScanPage {
               // invalid request
               this.backend.info(barcode)
                 .then((info) => {
-                  this.navCtrl.push(InfoPage, {info: info});
+                  this.navCtrl.push(InfoPage,
+                    {
+                      info: info,
+                      isEvent: true,
+                      isValid: false
+                    });
                   //this.displayMember(false, info, this.eventType);
                 }).catch((infoError) => {
                   this.alertCtrl.create({
@@ -93,7 +98,12 @@ export class ScanPage {
             } else {
               // valid request
               this.hackerInfo = reply;
-              this.navCtrl.push(InfoPage, {info: reply});
+              this.navCtrl.push(InfoPage,
+                {
+                  info: reply,
+                  isEvent: true,
+                  isValid: true
+                });
               //this.displayMember(true, reply, this.eventType);
             }
           });
@@ -108,7 +118,12 @@ export class ScanPage {
   }
 
   testConfirmDisplay() {
-    this.navCtrl.push(InfoPage, {info: this.fakePersonObject});
+    this.navCtrl.push(InfoPage,
+      {
+        info: this.fakePersonObject,
+        isEvent: true,
+        isValid: true
+      });
   }
 
     /*

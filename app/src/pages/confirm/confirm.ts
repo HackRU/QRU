@@ -12,7 +12,7 @@ import { NavController, NavParams } from 'ionic-angular';
   templateUrl: 'confirm.html'
 })
 export class ConfirmPage {
-  confirmation: Object;
+  //confirmation: Object;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     //this.confirmation = hackerInfo;

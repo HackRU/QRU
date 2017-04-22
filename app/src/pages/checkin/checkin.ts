@@ -159,7 +159,12 @@ export class CheckinPage {
 
   testInfoDisplay() {
     //this.displayInfo(this.fakePersonObject);
-    this.navCtrl.push(InfoPage, {info: this.fakePersonObject});
+    this.navCtrl.push(InfoPage,
+      {
+        info: this.fakePersonObject,
+        isEvent: false,
+        isValid: false
+      });
   }
 
     /*
@@ -306,7 +311,12 @@ export class CheckinPage {
   testInfo(email: String) {
     // backend info
     this.backend.info(email).then((reply) => {
-      this.navCtrl.push(InfoPage, {info: reply});
+      this.navCtrl.push(InfoPage,
+        {
+          info: reply,
+          isEvent: false,
+          isValid: false
+        });
       //this.displayInfo(reply);
     }).catch((apiError) => {
       this.alertCtrl.create({
