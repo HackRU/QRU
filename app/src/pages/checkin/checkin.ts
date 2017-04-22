@@ -9,7 +9,7 @@ import { ZBar } from '@ionic-native/zbar';
 import { QruBackend } from '../../providers/qru-backend';
 import { IssuesPage } from '../issues/issues';
 import { ListPage } from '../list/list';
-//import { InfoPage } from '../info/info';
+import { InfoPage } from '../info/info';
 
 /*
   Generated class for the Checkin page.
@@ -158,9 +158,11 @@ export class CheckinPage {
   }
 
   testInfoDisplay() {
-    this.displayInfo(this.fakePersonObject);
+    //this.displayInfo(this.fakePersonObject);
+    this.navCtrl.push(InfoPage, {info: this.fakePersonObject});
   }
 
+    /*
   displayInfo(info: any) {
     this.alertCtrl.create({
       title: info.firstName + ' ' + info.lastName,
@@ -175,6 +177,7 @@ export class CheckinPage {
       buttons: ['OK']
     }).present();
   }
+  */
 
   // for debugging
   selectEvent() {
@@ -303,8 +306,8 @@ export class CheckinPage {
   testInfo(email: String) {
     // backend info
     this.backend.info(email).then((reply) => {
-      //this.navCtrl.push(InfoPage, {info: reply});
-      this.displayInfo(reply);
+      this.navCtrl.push(InfoPage, {info: reply});
+      //this.displayInfo(reply);
     }).catch((apiError) => {
       this.alertCtrl.create({
         title: apiError,

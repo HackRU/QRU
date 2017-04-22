@@ -8,9 +8,10 @@ import { QruBackend } from '../../providers/qru-backend';
 /*
 import { CheckinPage } from '../checkin/checkin';
 import { MealsPage } from '../meals/meals';
+*/
 import { ConfirmPage } from '../confirm/confirm';
 import { RejectPage } from '../reject/reject';
-*/
+import { InfoPage } from '../info/info';
 
 /*
   Generated class for the Scan page.
@@ -25,6 +26,7 @@ import { RejectPage } from '../reject/reject';
 export class ScanPage {
   eventType: String;
   fakePersonObject: Object;
+  hackerInfo: Object;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     /*public diagnostic: Diagnostic,*/ public alertCtrl: AlertController,
@@ -79,8 +81,8 @@ export class ScanPage {
               // invalid request
               this.backend.info(barcode)
                 .then((info) => {
-                  //this.navCtrl.push(RejectPage, {rejec: info});
-                  this.displayMember(false, info, this.eventType);
+                  this.navCtrl.push(RejectPage, {rejec: info});
+                  //this.displayMember(false, info, this.eventType);
                 }).catch((infoError) => {
                   this.alertCtrl.create({
                     title: infoError,
@@ -90,8 +92,9 @@ export class ScanPage {
                 });
             } else {
               // valid request
-              //this.navCtrl.push(ConfirmPage, {conf: reply});
-              this.displayMember(true, reply, this.eventType);
+              this.hackerInfo = reply;
+              this.navCtrl.push(ConfirmPage /*, {conf: reply}*/);
+              //this.displayMember(true, reply, this.eventType);
             }
           });
       }).catch((error) => {
@@ -105,10 +108,10 @@ export class ScanPage {
   }
 
   testConfirmDisplay() {
-    //this.navCtrl.push(ConfirmPage, {conf: personObject});
-    this.displayMember(true, this.fakePersonObject, 'checkIn');
+    this.navCtrl.push(InfoPage, {info: this.fakePersonObject});
   }
 
+    /*
   displayMember(isValid: boolean, info: any, eventType: String) {
     var line: string;
     line = info.firstName + ' ' + info.lastName + ' .... ' +
@@ -136,6 +139,7 @@ export class ScanPage {
       buttons: ['OK']
     }).present();
   }
+  */
 
     /*
   back() {
