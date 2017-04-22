@@ -8,9 +8,9 @@ import { QruBackend } from '../../providers/qru-backend';
 /*
 import { CheckinPage } from '../checkin/checkin';
 import { MealsPage } from '../meals/meals';
-*/
 import { ConfirmPage } from '../confirm/confirm';
 import { RejectPage } from '../reject/reject';
+*/
 import { InfoPage } from '../info/info';
 
 /*
@@ -81,7 +81,7 @@ export class ScanPage {
               // invalid request
               this.backend.info(barcode)
                 .then((info) => {
-                  this.navCtrl.push(RejectPage, {rejec: info});
+                  this.navCtrl.push(InfoPage, {info: info});
                   //this.displayMember(false, info, this.eventType);
                 }).catch((infoError) => {
                   this.alertCtrl.create({
@@ -93,7 +93,7 @@ export class ScanPage {
             } else {
               // valid request
               this.hackerInfo = reply;
-              this.navCtrl.push(ConfirmPage /*, {conf: reply}*/);
+              this.navCtrl.push(InfoPage, {info: reply});
               //this.displayMember(true, reply, this.eventType);
             }
           });
