@@ -22,11 +22,28 @@ import { ListPage } from '../list/list';
   templateUrl: 'checkin.html'
 })
 export class CheckinPage {
+  fakePersonObject: Object;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public zbar: ZBar, public alertCtrl: AlertController,
     public actionSheetCtrl: ActionSheetController,
-    public diagnostic: Diagnostic, public backend: QruBackend) {}
+    public diagnostic: Diagnostic, public backend: QruBackend) {
+    this.fakePersonObject = {
+      firstName: 'firstName',
+      lastName: 'lastName',
+      email: 'name@example.com',
+      data:
+      {
+        checkedIn: true,
+        tshirt: true,
+        lunch1: 1,
+        dinner: 1,
+        midnightSnack: 1,
+        breakfast: 1,
+        lunch2: 1
+      }
+    };
+  }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad CheckinPage');
@@ -140,16 +157,20 @@ export class CheckinPage {
     });
   }
 
+  testInfoDisplay() {
+    this.displayInfo(this.fakePersonObject);
+  }
+
   displayInfo(info: any) {
     this.alertCtrl.create({
       title: info.firstName + ' ' + info.lastName,
-      subTitle: 'email: ' + info.email + '\n' +
-      'checked in: ' + info.data.checkedIn + '\n' +
-      'tshirt: ' + info.data.tshirt + '\n' +
-      'lunch 1: ' + info.data.lunch1 + '\n' +
-      'dinner: ' + info.data.dinner + '\n' +
-      'midnight snack: ' + info.data.midnightSnack + '\n' +
-      'breakfast: ' + info.data.breakfast + '\n' +
+      subTitle: 'email: ' + info.email + ' .... ' +
+      'checked in: ' + info.data.checkedIn + ' .... ' +
+      'tshirt: ' + info.data.tshirt + ' .... ' +
+      'lunch 1: ' + info.data.lunch1 + ' .... ' +
+      'dinner: ' + info.data.dinner + ' .... ' +
+      'midnight snack: ' + info.data.midnightSnack + ' .... ' +
+      'breakfast: ' + info.data.breakfast + ' .... ' +
       'lunch 2: ' + info.data.lunch2,
       buttons: ['OK']
     }).present();

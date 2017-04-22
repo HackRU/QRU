@@ -84,16 +84,11 @@ export class ScanPage {
                 }).catch((infoError) => {
                   this.alertCtrl.create({
                     title: infoError,
-                    subTitle: 'not registered',
+                    subTitle: barcode + ' is not a registered email',
                     buttons: ['OK']
                   }).present();
                 });
             } else {
-              this.alertCtrl.create({
-                title: 'testing',
-                subTitle: 'have info',
-                buttons: ['OK']
-              }).present();
               // valid request
               //this.navCtrl.push(ConfirmPage, {conf: reply});
               this.displayMember(true, reply, this.eventType);
@@ -109,20 +104,15 @@ export class ScanPage {
       });
   }
 
-    /*
   testConfirmDisplay() {
     //this.navCtrl.push(ConfirmPage, {conf: personObject});
     this.displayMember(true, this.fakePersonObject, 'checkIn');
   }
 
-  testInfoDisplay() {
-    this.displayInfo(this.fakePersonObject);
-  }
-  */
-
   displayMember(isValid: boolean, info: any, eventType: String) {
     var line: string;
-    line = info.firstName + ' ' + info.lastName + '\nemail: ' + info.email + '\n';
+    line = info.firstName + ' ' + info.lastName + ' .... ' +
+      'email: ' + info.email + ' .... ';
     if (eventType == 'checkIn') {
       line += 'checked in: ' + info.data.checkedIn;
     } else if (eventType == 'tshirt') {
