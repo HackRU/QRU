@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Scan</ion-title>
+    <ion-title>Scanning for {{ eventType }}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -17,10 +17,12 @@
   <!--
   <button ion-button block (click)='back()'>Back</button>
   -->
-  <button ion-button block (click)="openCamera()">
+  <button ion-button large block (click)="openCamera()">
     Scan
   </button>
+  <!--
   <button ion-button block (click)="testConfirmDisplay()">
     Test Confirm Display
   </button>
+  -->
 </ion-content>
