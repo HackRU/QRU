@@ -72,7 +72,7 @@ export class ScanPage {
   */
 
   openCamera() {
-    this.zbar.scan({flash:'off', drawSight:false})
+    this.zbar.scan({flash:'off', drawSight:true})
       .then((barcode) => {
         this.backend.update(this.eventType, barcode)
           .then((reply) => {
