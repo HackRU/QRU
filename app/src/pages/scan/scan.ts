@@ -5,6 +5,7 @@ import { AlertController } from 'ionic-angular';
 // import { BarcodeScanner } from 'ionic-native';
 import { ZBar } from '@ionic-native/zbar';
 import { QruBackend } from '../../providers/qru-backend';
+import { LabelPrinter } from '../../providers/label-printer';
 /*
 import { CheckinPage } from '../checkin/checkin';
 import { MealsPage } from '../meals/meals';
@@ -29,7 +30,7 @@ export class ScanPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     /*public diagnostic: Diagnostic,*/ public alertCtrl: AlertController,
-    public zbar: ZBar, public backend: QruBackend) {
+    public zbar: ZBar, public backend: QruBackend, public labelPrinter: LabelPrinter) {
     this.eventType = navParams.get('eventType');
     this.fakePersonObject = {
       firstName: 'firstName',
@@ -108,6 +109,9 @@ export class ScanPage {
                 });
                 */
               this.displayMember(true, reply, this.eventType);
+              if (this.eventType == 'checkIn') {
+                labelPrinter.printLabel(reply.email);
+              }
             }
           });
       }).catch((error) => {
@@ -150,7 +154,7 @@ export class ScanPage {
     } else if (eventType == 'lunch2') {
       line = 'lunch 2: ' + info.data.lunch2;
     } else {
-      line = 'event does non exist';
+      line = 'event does not exist';
     }
     this.alertCtrl.create({
       title: isValid ? 'Confirmed' : 'Rejected',
