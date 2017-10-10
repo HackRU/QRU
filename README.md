@@ -1,9 +1,9 @@
 # QRU
 
-using ZBar as barcode scanner
+using ZBar as barcode scanner (https://github.com/tjwoon/csZBar/blob/master/README.md)
 --------------------------------
 
-ionic cordova plugin add https://github.com/tjwoon/csZBar.git
+cordova plugin add cordova-plugin-cszbar
 
 npm install --save @ionic-native/zbar
 
