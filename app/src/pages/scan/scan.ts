@@ -110,7 +110,7 @@ export class ScanPage {
                 */
               this.displayMember(true, reply, this.eventType);
               if (this.eventType == 'checkIn') {
-                labelPrinter.printLabel(reply.email);
+                this.labelPrinter.print(reply.firstName, reply.lastName, reply.email);
               }
             }
           });

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { AlertController } from 'ionic-angular';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/toPromise';
 
 /*
   Generated class for the LabelPrinter provider.
@@ -12,19 +13,27 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class LabelPrinter {
   baseUrl: String;
-  token: String;
+  pass: String;
 
   constructor(public http: Http, public alertCtrl: AlertController) {
     console.log('Hello LabelPrinter Provider');
     this.baseUrl = 'https://node-app.com';
     /* insert token here */
-    this.token = 'token placeholder';
+    this.pass = 'token placeholder';
   }
 
-  print(email: String) {
-    this.http.post(this.baseUrl + '/initiate', {email: email, token: this.token})
-      .toPromise.then((hash) => {
-        this.http.post(this.baseUrl + '/confirm', {hash: hash});
+  print(firstName: String, lastName: String, email: String) {
+    this.http.get(this.baseUrl + '/auth?pass=' + this.pass)
+      .toPromise().then((token) => {
+        this.http.get(this.baseUrl + '/print?csrf=' + token + '&first_name=' +
+          firstName + '&lastName=' + lastName + '&email=' + email);
+      }).catch((error) => {
+        console.error(error);
+        this.alertCtrl.create({
+          title: error,
+          subTitle: 'failed to print label',
+          buttons: ['OK']
+        });
       });
   }
 
