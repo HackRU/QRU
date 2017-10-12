@@ -19,6 +19,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { ZBar } from '@ionic-native/zbar';
 import { Diagnostic } from '@ionic-native/diagnostic';
 import { QruBackend } from '../providers/qru-backend';
+import { LabelPrinter } from '../providers/label-printer';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import { QruBackend } from '../providers/qru-backend';
     SplashScreen,
     ZBar,
     QruBackend,
+    LabelPrinter,
     Diagnostic,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]

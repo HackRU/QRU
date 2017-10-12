@@ -17,7 +17,7 @@ export class LabelPrinter {
 
   constructor(public http: Http, public alertCtrl: AlertController) {
     console.log('Hello LabelPrinter Provider');
-    this.baseUrl = 'http://dc2c6aee.ngrok.io';
+    this.baseUrl = 'http://abeebffc.ngrok.io';
     /* insert token here */
     this.pass = 'SteveWTF';
   }
@@ -26,7 +26,7 @@ export class LabelPrinter {
     this.http.get(this.baseUrl + '/auth?pass=' + this.pass)
       .toPromise().then((token) => {
         this.http.get(this.baseUrl + '/print?csrf=' + token + '&first_name=' +
-          firstName + '&lastName=' + lastName + '&email=' + email);
+          firstName + '&last_name=' + lastName + '&email=' + email);
       }).catch((error) => {
         console.error(error);
         this.alertCtrl.create({
