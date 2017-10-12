@@ -1,6 +1,8 @@
 {
   "name": "app",
-  "v2": true,
   "app_id": "02d34c2a",
-  "typescript": true
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
 }

@@ -17,9 +17,9 @@ export class LabelPrinter {
 
   constructor(public http: Http, public alertCtrl: AlertController) {
     console.log('Hello LabelPrinter Provider');
-    this.baseUrl = 'https://node-app.com';
+    this.baseUrl = 'http://dc2c6aee.ngrok.io';
     /* insert token here */
-    this.pass = 'token placeholder';
+    this.pass = 'SteveWTF';
   }
 
   print(firstName: String, lastName: String, email: String) {

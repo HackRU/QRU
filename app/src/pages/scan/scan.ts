@@ -11,8 +11,8 @@ import { CheckinPage } from '../checkin/checkin';
 import { MealsPage } from '../meals/meals';
 import { ConfirmPage } from '../confirm/confirm';
 import { RejectPage } from '../reject/reject';
-import { InfoPage } from '../info/info';
 */
+import { InfoPage } from '../info/info';
 
 /*
   Generated class for the Scan page.
@@ -89,7 +89,7 @@ export class ScanPage {
                       isValid: false
                     });
                     */
-                  this.displayMember(false, info, this.eventType);
+                  //this.displayMember(false, info, this.eventType);
                 }).catch((infoError) => {
                   this.alertCtrl.create({
                     title: infoError,
@@ -99,19 +99,22 @@ export class ScanPage {
                 });
             } else {
               // valid request
-              /*
-              this.hackerInfo = reply;
+              //this.hackerInfo = reply;
+              this.alertCtrl.create({
+                  title: 'debug',
+                  subTitle: 'We got here! ' + this.eventType,
+                  buttons: ['OK']
+                }).present();
+//              if (this.eventType == 'checkIn') {
+                this.labelPrinter.print(reply.firstName, reply.lastName, reply.email);
+//              }
               this.navCtrl.push(InfoPage,
                 {
                   info: reply,
                   isEvent: true,
                   isValid: true
                 });
-                */
-              this.displayMember(true, reply, this.eventType);
-              if (this.eventType == 'checkIn') {
-                this.labelPrinter.print(reply.firstName, reply.lastName, reply.email);
-              }
+              //this.displayMember(true, reply, this.eventType);
             }
           });
       }).catch((error) => {
@@ -133,9 +136,10 @@ export class ScanPage {
         isValid: true
       });
       */
-    this.displayMember(true, this.fakePersonObject, 'checkIn');
+    //this.displayMember(true, this.fakePersonObject, 'checkIn');
   }
 
+/*
   displayMember(isValid: boolean, info: any, eventType: String) {
     var line: string;
     line = null;
@@ -162,6 +166,7 @@ export class ScanPage {
       buttons: ['OK']
     }).present();
   }
+*/
 
     /*
   back() {
