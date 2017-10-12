@@ -89,7 +89,7 @@ export class ScanPage {
                       isValid: false
                     });
                     */
-                  //this.displayMember(false, info, this.eventType);
+                  this.displayMember(false, info, this.eventType);
                 }).catch((infoError) => {
                   this.alertCtrl.create({
                     title: infoError,
@@ -105,16 +105,16 @@ export class ScanPage {
                   subTitle: 'We got here! ' + this.eventType,
                   buttons: ['OK']
                 }).present();
-//              if (this.eventType == 'checkIn') {
+              if (this.eventType == 'checkIn') {
                 this.labelPrinter.print(reply.firstName, reply.lastName, reply.email);
-//              }
+              }
               this.navCtrl.push(InfoPage,
                 {
                   info: reply,
                   isEvent: true,
                   isValid: true
                 });
-              //this.displayMember(true, reply, this.eventType);
+              this.displayMember(true, reply, this.eventType);
             }
           });
       }).catch((error) => {
@@ -139,7 +139,6 @@ export class ScanPage {
     //this.displayMember(true, this.fakePersonObject, 'checkIn');
   }
 
-/*
   displayMember(isValid: boolean, info: any, eventType: String) {
     var line: string;
     line = null;
@@ -166,7 +165,6 @@ export class ScanPage {
       buttons: ['OK']
     }).present();
   }
-*/
 
     /*
   back() {
