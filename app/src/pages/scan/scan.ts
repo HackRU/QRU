@@ -11,8 +11,8 @@ import { CheckinPage } from '../checkin/checkin';
 import { MealsPage } from '../meals/meals';
 import { ConfirmPage } from '../confirm/confirm';
 import { RejectPage } from '../reject/reject';
-*/
 import { InfoPage } from '../info/info';
+*/
 
 /*
   Generated class for the Scan page.
@@ -26,12 +26,13 @@ import { InfoPage } from '../info/info';
 })
 export class ScanPage {
   eventType: String;
-  fakePersonObject: Object;
+  //   fakePersonObject: Object;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     /*public diagnostic: Diagnostic,*/ public alertCtrl: AlertController,
     public zbar: ZBar, public backend: QruBackend, public labelPrinter: LabelPrinter) {
     this.eventType = navParams.get('eventType');
+/*
     this.fakePersonObject = {
       firstName: 'firstName',
       lastName: 'lastName',
@@ -47,6 +48,7 @@ export class ScanPage {
         lunch2: 1
       }
     };
+*/
   }
 
     /*
@@ -100,20 +102,24 @@ export class ScanPage {
             } else {
               // valid request
               //this.hackerInfo = reply;
+/*
               this.alertCtrl.create({
                   title: 'debug',
                   subTitle: 'We got here! ' + this.eventType,
                   buttons: ['OK']
                 }).present();
+*/
               if (this.eventType == 'checkIn') {
                 this.labelPrinter.print(reply.firstName, reply.lastName, reply.email);
               }
+/*
               this.navCtrl.push(InfoPage,
                 {
                   info: reply,
                   isEvent: true,
                   isValid: true
                 });
+*/
               this.displayMember(true, reply, this.eventType);
             }
           });
@@ -127,17 +133,17 @@ export class ScanPage {
       });
   }
 
-  testConfirmDisplay() {
     /*
+  testConfirmDisplay() {
     this.navCtrl.push(InfoPage,
       {
         info: this.fakePersonObject,
         isEvent: true,
         isValid: true
       });
-      */
     //this.displayMember(true, this.fakePersonObject, 'checkIn');
   }
+      */
 
   displayMember(isValid: boolean, info: any, eventType: String) {
     var line: string;

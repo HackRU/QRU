@@ -7,6 +7,7 @@ import { ScanPage } from '../scan/scan';
 // test for debugging
 import { ZBar } from '@ionic-native/zbar';
 import { QruBackend } from '../../providers/qru-backend';
+import { LabelPrinter } from '../../providers/label-printer';
 import { IssuesPage } from '../issues/issues';
 import { ListPage } from '../list/list';
 import { InfoPage } from '../info/info';
@@ -27,7 +28,8 @@ export class CheckinPage {
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public zbar: ZBar, public alertCtrl: AlertController,
     public actionSheetCtrl: ActionSheetController,
-    public diagnostic: Diagnostic, public backend: QruBackend) {
+    public diagnostic: Diagnostic, public backend: QruBackend,
+    public labelPrinter: LabelPrinter) {
     this.fakePersonObject = {
       firstName: 'firstName',
       lastName: 'lastName',
@@ -145,6 +147,8 @@ export class CheckinPage {
         }).present();
       } else if (mode == 'info') {
         this.testInfo(barcode);
+      } else if (mode == 'extraLabel') {
+        this.printExtraLabel(barcode);
       } else {
         this.testUpdate(mode, barcode);
       }
@@ -317,4 +321,17 @@ export class CheckinPage {
     });
   }
 
+  printExtraLabel(email: String) {
+    // backend info
+    this.backend.info(email).then((reply: any) => {
+      this.labelPrinter.print(reply.firstName, reply.lastName, reply.email);
+      //this.displayInfo(reply);
+    }).catch((apiError) => {
+      this.alertCtrl.create({
+        title: apiError,
+        subTitle: 'failed to call API',
+        buttons: ['OK']
+      });
+    });
+  }
 }

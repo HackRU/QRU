@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { Http, } from '@angular/http';
 import { AlertController } from 'ionic-angular';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
@@ -17,7 +17,7 @@ export class LabelPrinter {
 
   constructor(public http: Http, public alertCtrl: AlertController) {
     console.log('Hello LabelPrinter Provider');
-    this.baseUrl = 'http://d2b71645.ngrok.io';
+    this.baseUrl = 'http://qru-label-maker.ngrok.io';
     /* insert token here */
     this.pass = 'SteveWTF';
   }
@@ -28,17 +28,21 @@ export class LabelPrinter {
         var fullUrl = this.baseUrl + '/print?csrf=' + token.text() + '&first_name=' +
               firstName + '&last_name=' + lastName + '&email=' + email;
         this.http.get(fullUrl).toPromise().then((reply) => {
+/*
             this.alertCtrl.create({
                 title: 'reply from print',
                 subTitle: reply.text(),
                 buttons: ['OK']
             }).present();
+*/
         });
+/*
         this.alertCtrl.create({
             title: 'called auth',
             subTitle: fullUrl,
             buttons: ['OK']
         }).present();
+*/
 /*
       }).catch((error) => {
         console.error(error);
