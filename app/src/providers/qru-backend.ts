@@ -16,7 +16,7 @@ export class QruBackend {
 
   constructor(public http: Http, public alertCtrl: AlertController) {
     console.log('Hello QruBackend Provider');
-    this.baseUrl = 'http://ec2-54-186-192-209.us-west-2.compute.amazonaws.com:9000/';
+    this.baseUrl = 'https://m7cwj1fy7c.execute-api.us-west-2.amazonaws.com/test';
   }
 
   update(eventType: String, email: String) {
